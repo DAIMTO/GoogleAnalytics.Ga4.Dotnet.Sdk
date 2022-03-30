@@ -1,5 +1,7 @@
 # GoogleAnalytics.Ga4-Dotnet.Sdk - Beta
 
+**UNOFFICAL** Tracker for Google Analytics ga4 and .net
+
 
 This is an sdk designed for use with the [Google analytics ga4 measurement protocol](https://developers.google.com/analytics/devguides/collection/protocol/ga4)
 
