@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleAnalytics.Ga4.DotNet.Sdk", "GoogleAnalytics.Ga4.DotNet.Sdk\GoogleAnalytics.Ga4.DotNet.Sdk.csproj", "{93654452-B2E4-4012-9FCD-BBEFD95AC96F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ga4Tests", "Tests\Ga4Tests\Ga4Tests.csproj", "{5A610B86-C002-4045-BA79-A4AAC6DE2A4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{FE9A863E-8B4B-4A13-88D8-98AB85320A5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D3E217CF-56F9-4149-B51E-FF858B00B37D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiClient", "WebApiClient\WebApiClient.csproj", "{323397D0-8D2A-43A0-90A3-F10CDABDC57D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93654452-B2E4-4012-9FCD-BBEFD95AC96F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93654452-B2E4-4012-9FCD-BBEFD95AC96F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93654452-B2E4-4012-9FCD-BBEFD95AC96F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93654452-B2E4-4012-9FCD-BBEFD95AC96F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A610B86-C002-4045-BA79-A4AAC6DE2A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A610B86-C002-4045-BA79-A4AAC6DE2A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A610B86-C002-4045-BA79-A4AAC6DE2A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A610B86-C002-4045-BA79-A4AAC6DE2A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{323397D0-8D2A-43A0-90A3-F10CDABDC57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323397D0-8D2A-43A0-90A3-F10CDABDC57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323397D0-8D2A-43A0-90A3-F10CDABDC57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323397D0-8D2A-43A0-90A3-F10CDABDC57D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5A610B86-C002-4045-BA79-A4AAC6DE2A4A} = {D3E217CF-56F9-4149-B51E-FF858B00B37D}
+		{93654452-B2E4-4012-9FCD-BBEFD95AC96F} = {FE9A863E-8B4B-4A13-88D8-98AB85320A5C}
+	EndGlobalSection
+EndGlobal

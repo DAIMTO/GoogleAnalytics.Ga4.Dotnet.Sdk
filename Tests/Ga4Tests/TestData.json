@@ -1,0 +1,19 @@
+{
+  "client_id": "test",
+  "non_personalized_ads": false,
+  "events": [
+    {
+      "name": "test",
+      "params": {
+        "items": [
+          {
+            "itemitem1": "itemitem1value",
+            "itemitem1number": 1
+          }
+        ],
+        "stringparm1": "stringValue1",
+        "intparm1": 1
+      }
+    }
+  ]
+}
