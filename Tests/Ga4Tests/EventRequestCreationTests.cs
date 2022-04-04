@@ -67,9 +67,6 @@ public class EventRequestCreationTests
         request.ClientId.ShouldBe(clientId);
         request.UserId.ShouldNotBeNullOrWhiteSpace();
         request.UserId.ShouldBe(userId);
-        
-      
-        
         request.TimestampMicros.ShouldNotBe(0);   // better way to check for min value.
     }
 }

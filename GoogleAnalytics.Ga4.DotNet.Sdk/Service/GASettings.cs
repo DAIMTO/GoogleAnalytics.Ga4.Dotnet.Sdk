@@ -2,7 +2,7 @@
 
 public class GoogleAnalyticsClientSettings
 {
-    public string MeasurmentId { get; set; }
+    public string MeasurementId { get; set; }
     public string AppSecret { get; set; }
     
 }
