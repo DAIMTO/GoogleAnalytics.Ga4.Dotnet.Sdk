@@ -20,8 +20,8 @@ public class BasicHttpClient: IBasicHttpClient
     
     public async Task<HttpResponseMessage> PostAsync(string path, IEventRequest data)
     {
-        var fullPath = $"{path}?measurement_id={_settings.MeasurmentId}&api_secret=${_settings.AppSecret}";
-        var hold =JsonSerializer.Serialize(data);
+        var fullPath = $"{path}?measurement_id={_settings.MeasurementId}&api_secret=${_settings.AppSecret}";
+        var hold = JsonSerializer.Serialize(data);
         
         // Send Message to GateWay
         return await _client.PostAsJsonAsync(fullPath, data, JsonHelper.GetOptions());

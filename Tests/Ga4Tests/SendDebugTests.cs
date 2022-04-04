@@ -20,7 +20,7 @@ public class SendDebugTests
         return Options.Create(new GoogleAnalyticsClientSettings()
         {
             AppSecret = "XXXXX",
-            MeasurmentId = "G-XXXXXX",
+            MeasurementId = "G-XXXXXX",
         });
     }
     
