@@ -46,22 +46,20 @@ public class EventRequest : IEventRequest
     {
         NonPersonalizedAds = nonPersonalizedAds;
     }
-    public async Task<EventResponse> Send(bool debug =false)
+    public async Task<EventResponse> Send(bool debug = false)
     {
         var path = "/mp/collect";
         
-        if(debug) path = "/debug/mp/collect";
+        if (debug) path = "/debug/mp/collect";
         
         var response = await Client.PostAsync(path, this);
         var responseData = await response.Content.ReadAsStringAsync();
 
-        var data = JsonSerializer.Deserialize<DebugResponse>(responseData);
-
-        return new EventResponse()
+        return new EventResponse
         {
             IsSuccess = response.IsSuccessStatusCode,
             Message = response,
-            DebugResponse = (debug)? JsonSerializer.Deserialize<DebugResponse>(responseData) : null
+            DebugResponse = debug ? JsonSerializer.Deserialize<DebugResponse>(responseData) : null
         };
     }
 
