@@ -15,7 +15,7 @@ public interface  IEventRequest
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [JsonPropertyName("timestamp_micros")] 
-    public int TimestampMicros { get; set; }
+    public double TimestampMicros { get; set; }
 
     [JsonPropertyName("non_personalized_ads")]
     public bool NonPersonalizedAds { get; set; }

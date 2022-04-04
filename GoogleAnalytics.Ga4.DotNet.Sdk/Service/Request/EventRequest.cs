@@ -1,5 +1,7 @@
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using GoogleAnalytics.Ga4.DotNet.Sdk.Extensions;
 using GoogleAnalytics.Ga4.DotNet.Sdk.Service.Client;
 using GoogleAnalytics.Ga4.DotNet.Sdk.Service.Response;
 
@@ -19,7 +21,7 @@ public class EventRequest : IEventRequest
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [JsonPropertyName("timestamp_micros")] 
-    public int TimestampMicros { get; set; }
+    public double TimestampMicros { get; set; }
 
     [JsonPropertyName("non_personalized_ads")]
     public bool NonPersonalizedAds { get; set; }
@@ -32,17 +34,15 @@ public class EventRequest : IEventRequest
     {
         if (string.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
         
-        var t = DateTime.UtcNow - new DateTime(1970, 1, 1);
-        var secondsSinceEpoch = (int)t.TotalSeconds;
-        
-        TimestampMicros = secondsSinceEpoch;
+        var timespanSinceEpoch = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        TimestampMicros = Math.Truncate(timespanSinceEpoch.TotalMicroseconds());
         ClientId = clientId;
     }
-    public EventRequest(string clientId, string userId) :this(clientId)
+    public EventRequest(string clientId, string userId) : this(clientId)
     {
         UserId = userId;
     }
-    public EventRequest(string clientId, string userId, bool nonPersonalizedAds = false) :this(clientId, userId)
+    public EventRequest(string clientId, string userId, bool nonPersonalizedAds = false) : this(clientId, userId)
     {
         NonPersonalizedAds = nonPersonalizedAds;
     }
