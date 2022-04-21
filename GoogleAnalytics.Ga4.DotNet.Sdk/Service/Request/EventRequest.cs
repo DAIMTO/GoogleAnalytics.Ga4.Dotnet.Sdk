@@ -1,5 +1,7 @@
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using GoogleAnalytics.Ga4.DotNet.Sdk.Extensions;
 using GoogleAnalytics.Ga4.DotNet.Sdk.Service.Client;
 using GoogleAnalytics.Ga4.DotNet.Sdk.Service.Response;
 
@@ -19,7 +21,7 @@ public class EventRequest : IEventRequest
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [JsonPropertyName("timestamp_micros")] 
-    public int TimestampMicros { get; set; }
+    public double TimestampMicros { get; set; }
 
     [JsonPropertyName("non_personalized_ads")]
     public bool NonPersonalizedAds { get; set; }
@@ -35,36 +37,32 @@ public class EventRequest : IEventRequest
     {
         if (string.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
         
-        var t = DateTime.UtcNow - new DateTime(1970, 1, 1);
-        var secondsSinceEpoch = (int)t.TotalSeconds;
-        
-        TimestampMicros = secondsSinceEpoch;
+        var timespanSinceEpoch = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        TimestampMicros = Math.Truncate(timespanSinceEpoch.TotalMicroseconds());
         ClientId = clientId;
     }
-    public EventRequest(string clientId, string userId) :this(clientId)
+    public EventRequest(string clientId, string userId) : this(clientId)
     {
         UserId = userId;
     }
-    public EventRequest(string clientId, string userId, bool nonPersonalizedAds = false) :this(clientId, userId)
+    public EventRequest(string clientId, string userId, bool nonPersonalizedAds = false) : this(clientId, userId)
     {
         NonPersonalizedAds = nonPersonalizedAds;
     }
-    public async Task<EventResponse> Send(bool debug =false)
+    public async Task<EventResponse> Send(bool debug = false)
     {
         var path = "/mp/collect";
         
-        if(debug) path = "/debug/mp/collect";
+        if (debug) path = "/debug/mp/collect";
         
         var response = await Client.PostAsync(path, this);
         var responseData = await response.Content.ReadAsStringAsync();
 
-        var data = JsonSerializer.Deserialize<DebugResponse>(responseData);
-
-        return new EventResponse()
+        return new EventResponse
         {
             IsSuccess = response.IsSuccessStatusCode,
             Message = response,
-            DebugResponse = (debug)? JsonSerializer.Deserialize<DebugResponse>(responseData) : null
+            DebugResponse = debug ? JsonSerializer.Deserialize<DebugResponse>(responseData) : null
         };
     }
 

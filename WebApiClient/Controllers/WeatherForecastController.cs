@@ -1,4 +1,3 @@
-using System.Text.Json;
 using GoogleAnalytics.Ga4.DotNet.Sdk.Extensions;
 using GoogleAnalytics.Ga4.DotNet.Sdk.Service;
 using GoogleAnalytics.Ga4.DotNet.Sdk.Service.Request;
@@ -28,8 +27,6 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public async Task<IEnumerable<WeatherForecast>> Get()
     {
-    
-        
         var gaEvent = EventBuilders.BuildCustomEvent("test_event", new Dictionary<string, object>()).AddParameters("test","test");
         var request = new EventRequest("ClientId");
         request.AddEvent(gaEvent);

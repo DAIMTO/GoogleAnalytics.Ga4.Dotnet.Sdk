@@ -20,7 +20,7 @@ public class TestMiddleWare
     //private readonly Lazy<int> _httpsPort;
     private readonly int _statusCode;
 
-    private readonly string _measurmentId;
+    private readonly string _measurementId;
     private readonly IConfiguration _config;
     private readonly ILogger _logger;
 
@@ -45,7 +45,7 @@ public class TestMiddleWare
 
         var middleWareOptions = options.Value;
 
-        _measurmentId = middleWareOptions.MeasurementId;
+        _measurementId = middleWareOptions.MeasurementId;
 
 
         _logger = loggerFactory.CreateLogger<TestMiddleWare>();
