@@ -26,6 +26,9 @@ public class EventRequest : IEventRequest
 
     [JsonPropertyName("events")] 
     public List<IEvent> Events { get; set; }
+
+    [JsonPropertyName("user_properties")]
+    public Dictionary<string,object> UserProperties { get; set; }
     
     
     public EventRequest(string clientId)

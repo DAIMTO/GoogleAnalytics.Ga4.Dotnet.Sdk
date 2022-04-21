@@ -20,10 +20,9 @@ public class SendDebugEvents
     {
         // arrange
         var clientFactory = new MockHttpClientFactory();
-        var clientOptions = A.Fake<IOptions<HttpClientSettings>>();
         var gaOptions = SendDebugTests.Settings();
 
-        var client = new BasicHttpClient(clientFactory, clientOptions, gaOptions);
+        var client = new BasicHttpClient(clientFactory, gaOptions);
 
         var eventName = "TestEvent";
 
@@ -46,14 +45,49 @@ public class SendDebugEvents
     }
     
     [Fact]
+    public async void SendDebug_SingleEvent_With_UserProperties_Should_Work()
+    {
+        // arrange
+        var clientFactory = new MockHttpClientFactory();
+        var gaOptions = SendDebugTests.Settings();
+
+        var client = new BasicHttpClient(clientFactory, gaOptions);
+
+        var eventName = "TestEvent";
+
+        var gaEvent = EventBuilders.BuildCustomEvent(eventName, new Dictionary<string, object>()).AddParameters("test","test");
+        var request = new EventRequest("ClientId");
+        request.AddEvent(gaEvent);
+        
+        request.UserProperties = new Dictionary<string, object>()
+        {
+            { "favorite_food", "apples" },
+            { "favorite_color", "green" },
+        };
+
+        var hold =JsonSerializer.Serialize(request);
+        
+        // act  
+        var service = new MeasurementService(client);
+        var result = await service.CreateEventRequest(request).Execute(true);
+
+        // act
+        result.IsSuccess.ShouldBeTrue();
+        result.IsRequestValid().ShouldBeTrue();
+        result.Message.ShouldNotBeNull();
+        result.DebugResponse.ShouldNotBeNull();
+        result.DebugResponse.ValidationMessages.Count.ShouldBe(0);
+    }
+
+    
+    [Fact]
     public async void SendDebug_SingleEvent_With_One_Item_Should_Work()
     {
         // arrange
         var clientFactory = new MockHttpClientFactory();
-        var clientOptions = A.Fake<IOptions<HttpClientSettings>>();
         var gaOptions = SendDebugTests.Settings();
 
-        var client = new BasicHttpClient(clientFactory, clientOptions, gaOptions);
+        var client = new BasicHttpClient(clientFactory, gaOptions);
 
         var eventName = "TestEvent";
 
@@ -82,10 +116,9 @@ public class SendDebugEvents
     {
         // arrange
         var clientFactory = new MockHttpClientFactory();
-        var clientOptions = A.Fake<IOptions<HttpClientSettings>>();
         var gaOptions = SendDebugTests.Settings();
 
-        var client = new BasicHttpClient(clientFactory, clientOptions, gaOptions);
+        var client = new BasicHttpClient(clientFactory, gaOptions);
 
         var eventName = "TestEvent";
 

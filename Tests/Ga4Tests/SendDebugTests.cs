@@ -53,11 +53,10 @@ public class SendDebugTests
     {
         // arrange
         var clientFactory = new MockHttpClientFactory();
-        var clientOptions = A.Fake<IOptions<HttpClientSettings>>();
         var gaOptions =  Settings();
 
 
-        var client = new BasicHttpClient(clientFactory, clientOptions, gaOptions);
+        var client = new BasicHttpClient(clientFactory, gaOptions);
 
 
         // act  
@@ -77,11 +76,10 @@ public class SendDebugTests
     {
         // arrange
         var clientFactory = new MockHttpClientFactory();
-        var clientOptions = A.Fake<IOptions<HttpClientSettings>>();
         var gaOptions =  Settings();
 
 
-        var client = new BasicHttpClient(clientFactory, clientOptions, gaOptions);
+        var client = new BasicHttpClient(clientFactory, gaOptions);
 
 
         // act  
@@ -108,10 +106,9 @@ public class SendDebugTests
     {
         // arrange
         var clientFactory = new MockHttpClientFactory();
-        var clientOptions = A.Fake<IOptions<HttpClientSettings>>();
         var gaOptions =  Settings();
 
-        var client = new BasicHttpClient(clientFactory, clientOptions, gaOptions);
+        var client = new BasicHttpClient(clientFactory, gaOptions);
 
         // act  
         var clientId = "TestClient";
